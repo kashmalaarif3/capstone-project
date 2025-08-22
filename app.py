@@ -14,8 +14,8 @@ with open("models/kmeans_model.pkl", "rb") as f:
 with open("models/sales_prediction_model.pkl", "rb") as f:
     sales_model = pickle.load(f)   # This might be a dict (see note below)
 
-with open("models/sentiment_model.pkl", "rb") as f:
-    sentiment_model = pickle.load(f)
+#with open("models/sentiment_model.pkl", "rb") as f:
+    #sentiment_model = pickle.load(f)
 
 
 @app.route("/", methods=["GET"])
@@ -57,9 +57,9 @@ def predict():
 
         return jsonify({"model": "sales", "prediction": pred})
 
-    elif model_type == "sentiment":
-        result = sentiment_model.predict(text)
-        return jsonify({"model": "sentiment", "result": result})
+    #elif model_type == "sentiment":
+        #result = sentiment_model.predict(text)
+        #return jsonify({"model": "sentiment", "result": result})
 
     else:
         return jsonify({"error": "Invalid model_type"}), 400
