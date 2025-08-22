@@ -3,14 +3,18 @@ import pickle
 import numpy as np
 
 app = Flask(__name__)
-with open("models/logistic_model.pkl", "rb") as f:
-    log_model = pickle.load(f)
+with open("models/churn_model.pkl", "rb") as f:
+    churn_model = pickle.load(f)
 with open("models/kmeans_model.pkl", "rb") as f:
     kmeans_model = pickle.load(f)
+with open("models/sales_prediction_model.pkl", "rb") as f:
+    sales_prediction_model = pickle.load(f)
+with open("models/sentiment_model.pkl", "rb") as f:
+    sentiment_model = pickle.load(f)
 
 @app.route("/")
 def home():
-    return jsonify({"message": "Iris ML App is Running"}), 200
+    return jsonify({"message": "Customer Intelligence App is Running"}), 200
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -25,7 +29,7 @@ def predict():
         data = np.array(feature).reshape(1, -1)
 
         if model_type == 'logreg':
-            prediction = log_model.predict(data)[0]
+            prediction = churn_model.predict(data)[0]
         elif model_type =='kmeans':
             prediction = kmeans_model.predict(data)[0]
         else:
