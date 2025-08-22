@@ -48,6 +48,3 @@ POST /predict
   }
 }
   
-
-    }
-}"
